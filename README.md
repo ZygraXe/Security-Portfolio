@@ -1,19 +1,17 @@
 # Security Portfolio — Deepak M
 
-VAPT / offensive security portfolio documenting hands-on penetration testing work performed in isolated lab environments, alongside CTF writeups.
+VAPT / offensive security portfolio documenting hands-on penetration testing work, CTF writeups, and custom tooling — organized by category as the portfolio grows.
 
-##  Disclaimer
+## ⚠️ Disclaimer
 All testing in this repository was performed against self-hosted, intentionally vulnerable systems (OWASP Juice Shop, Metasploitable2) or authorized CTF platforms (TryHackMe), within isolated lab environments. This work is for educational purposes only — none of it targets real-world, unauthorized systems.
 
-## Projects
+## Categories
 
-| Project | Target | Type | Key Findings | Report |
-|---|---|---|---|---|
-| OWASP Juice Shop VAPT | OWASP Juice Shop | Web Application (Black Box) | SQL Injection, XSS, IDOR, Information Disclosure, Input Validation | [Full report →](./owasp-juiceshop-vapt/) |
-| Metasploitable2 VAPT | Metasploitable2 | Network / Host-based | vsftpd 2.3.4 Backdoor RCE (CVE-2011-2523, CVSS 9.8) | [Full report →](./metasploitable2-vapt/) |
-
-## TryHackMe Writeups
-Guided CTF-style writeups documenting enumeration and exploitation methodology across a range of rooms. See [`/writeups`](./writeups/) for the full index.
+| Category | Description |
+|---|---|
+| [`vapt-reports/`](./vapt-reports/) | Full engagement-style VAPT reports (recon → exploitation → remediation) |
+| `writeups/` | TryHackMe / CTF walkthroughs *(coming soon)* |
+| `tools/` | Custom scripts and tooling built for pentesting workflows *(coming soon)* |
 
 ## Tools & Skills
 - Kali Linux, Nmap, Burp Suite, Metasploit Framework, Searchsploit
