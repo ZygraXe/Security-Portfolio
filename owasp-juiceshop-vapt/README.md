@@ -17,10 +17,10 @@ Perform a black-box penetration test against OWASP Juice Shop to identify common
 | # | Finding | Severity | CVSS v3.1 |
 |---|---|---|---|
 | 1 | SQL Injection in Login Page | Critical | 9.8 |
-| 2 | Cross-Site Scripting (XSS) in Product Search | Medium | — |
-| 3 | Information Disclosure via robots.txt | Low | — |
-| 4 | Insecure Direct Object Reference (IDOR) in Cart | High | — |
-| 5 | Improper Input Validation in Product Quantity | Medium | — |
+| 2 | Cross-Site Scripting (XSS) in Product Search | Medium | 6.5 |
+| 3 | Information Disclosure via robots.txt | Medium | 5.3 |
+| 4 | Insecure Direct Object Reference (IDOR) in Cart | High | 7.6 |
+| 5 | Improper Input Validation in Product Quantity | High | 7.6 |
 
 *(See full report for CVSS vectors, reproduction steps/payloads, and remediation per finding. Fill in remaining CVSS scores to match Finding 1's format.)*
 
