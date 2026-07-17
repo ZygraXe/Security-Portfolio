@@ -52,11 +52,10 @@ We can see that this is the Tomcat home page in the port 8080
 
 ![webpage](./images/webpage.png)
 
-<br><br><br>
 
 I know that there is an exploit in Metasploit for this particular version of tomcat and also there are many exploits out there to use, But before that we need to know what exactly is AJP
 
-
+<br><br><br>
 
 ## AJP
 
@@ -104,11 +103,11 @@ There is another user named merlin and we can able to read the files of merlin's
 
 ![userflag](./images/usertxt.png)
 
-<br><br><br>
+
 
 OK now let's take a look at those two files we saw before and before that we need to know about PGP
 
-
+<br><br><br>
 
 ## PGP
 
