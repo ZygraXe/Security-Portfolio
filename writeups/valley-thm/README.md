@@ -1,4 +1,4 @@
-\## TryHackMe — Valley
+## TryHackMe — Valley
 
 Room: Valley · Difficulty: Easy · Category: Linux / Web Recon
 
@@ -6,7 +6,7 @@ Room: Valley · Difficulty: Easy · Category: Linux / Web Recon
 
 
 
-\## Executive Summary
+## Executive Summary
 
 
 
@@ -14,7 +14,7 @@ Valley is a beginner-friendly Linux machine that focuses on web enumeration, sou
 
 
 
-\## Enumeration
+## Enumeration
 
 
 
@@ -28,7 +28,7 @@ Used nmap and we can see there is only three port 22, 80 and 37370 are open
 
 
 
-!\[nmap\_base](./images/nmap\_base.png)
+![nmap\_base](./images/nmap\_base.png)
 
 
 
@@ -40,7 +40,7 @@ After this we ran nmap service detection scan on the target specific ports and g
 
 
 
-!\[nmap\_service](./images/nmap\_service.png)
+![nmap\_service](./images/nmap\_service.png)
 
 
 
@@ -48,7 +48,7 @@ On visiting the webpage at port 80 can see that it's a photography based website
 
 
 
-!\[webpage](./images/webpage.png)
+![webpage](./images/webpage.png)
 
 
 
@@ -56,7 +56,7 @@ After spending 20 minutes of inspecting this website I found nothing useful, the
 
 
 
-!\[FUZZ](./images/sub\_fuzz.png)
+![FUZZ](./images/sub\_fuzz.png)
 
 
 
@@ -64,7 +64,7 @@ On visiting the found subdir we got an interesting subdirectory named "/dev12432
 
 
 
-!\[secretdir](./images/secretdir.png)
+![secretdir](./images/secretdir.png)
 
 
 
@@ -72,7 +72,7 @@ There is an login page in the found dir
 
 
 
-!\[login page](./images/login\_page.png)
+![login page](./images/login\_page.png)
 
 
 
@@ -80,7 +80,7 @@ I tried to brute force the login with hydra but got nearly 200+ false positive. 
 
 
 
-!\[source](./images/source.png)
+![source](./images/source.png)
 
 
 
@@ -88,7 +88,7 @@ On the dev.js file we can found the a user name and password
 
 
 
-!\[sitecred](./images/site\_cred.png)
+![sitecred](./images/site\_cred.png)
 
 
 
@@ -100,7 +100,7 @@ We know that there is an ftp service running in the port 37370 so let's try to l
 
 
 
-!\[ftplogon](./images/ftp\_log.png)
+![ftplogon](./images/ftp\_log.png)
 
 
 
@@ -108,7 +108,7 @@ We can see that there are three pcapng files in there. so let's try to download 
 
 
 
-!\[ftpfiles](./images/ftp\_files.png)
+![ftpfiles](./images/ftp\_files.png)
 
 
 
@@ -116,7 +116,7 @@ On the particular file named "siemHTTP2.pcapng" we can see a user credential nam
 
 
 
-!\[wireshark](./images/ws.png)
+![wireshark](./images/ws.png)
 
 
 
@@ -124,7 +124,7 @@ So now let's try to login to the user valleyDev using SSH
 
 
 
-!\[sshlogin](./images/ssh\_logn.png)
+![sshlogin](./images/ssh\_logn.png)
 
 
 
@@ -132,7 +132,7 @@ We got the user flag in the user.txt at home directory
 
 
 
-!\[userflag](./images/usertxt.png)
+![userflag](./images/usertxt.png)
 
 
 
@@ -142,7 +142,7 @@ After searching few minutes I found an executable file in the "/home" directory 
 
 
 
-!\[executable](./images/execut.png)
+![executable](./images/execut.png)
 
 
 
@@ -150,11 +150,11 @@ Let's transfer it to the local machine and try to convert the executable data us
 
 
 
-!\[filetransfer](./images/filetrans.png)
+![filetransfer](./images/filetrans.png)
 
 
 
-!\[filereceive](./images/filerec.png)
+![filereceive](./images/filerec.png)
 
 
 
@@ -162,7 +162,7 @@ Now we can use Strings tool convert the data to readable format and store in "va
 
 
 
-!\[strings](./images/strings.png)
+![strings](./images/strings.png)
 
 
 
@@ -170,7 +170,7 @@ And we can able to find a encrypted md5 hash above the line "Welcome to valley I
 
 
 
-!\[hash](./images/pass.png)
+![hash](./images/pass.png)
 
 
 
@@ -178,11 +178,11 @@ I tried to crack this md5 hash with an website called crackstation and we got an
 
 
 
-!\[valleylogin](./images/valleylog.png)
+![valleylogin](./images/valleylog.png)
 
 
 
-\## Privilege Escalation
+## Privilege Escalation
 
 
 
@@ -192,7 +192,7 @@ I found that there is a cronjob that runs the file "photosEncrypt.py" as root on
 
 
 
-!\[cronjob](./images/cronjob.png)
+![cronjob](./images/cronjob.png)
 
 
 
@@ -206,11 +206,11 @@ So in here python uses the module base64.py and we can have access to write this
 
 ``` import os
 
-&#x20;   os.system("chmod u+s /bin/bash") ```
+os.system("chmod u+s /bin/bash") ```
 
 
 
-!\[payload](./images/payload.png)
+![payload](./images/payload.png)
 
 
 
@@ -218,11 +218,11 @@ And after a minute we got our root shell by running the cmd ```/bin/bash -p``` a
 
 
 
-!\[rootesc](./images/roottxt.png)
+![rootesc](./images/roottxt.png)
 
 
 
-\## Root Cause \& Remediation
+## Root Cause & Remediation
 
 
 
@@ -250,7 +250,7 @@ Apply the principle of least privilege by restricting unnecessary file permissio
 
 
 
-\## Lessons Learned / Conclusion
+## Lessons Learned / Conclusion
 
 
 
