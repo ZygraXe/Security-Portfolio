@@ -124,7 +124,7 @@ So now let's try to login to the user valleyDev using SSH
 
 
 
-![sshlogin](./images/ssh\_logn.png)
+![sshlogin](./images/ssh\_login.png)
 
 
 
@@ -203,10 +203,8 @@ So let's inspect the file photosEncrypt.py. In there we can see it picks a image
 So in here python uses the module base64.py and we can have access to write this module.the cron job's working directory puts your writable location ahead of the real module in search order, so lets add our payload to the base64.py file which gives us root shell when it gets executed by the cronjob.
 
 
-
-``` import os
-
-os.system("chmod u+s /bin/bash") ```
+``` import os ```
+``` os.system("chmod u+s /bin/bash") ```
 
 
 
