@@ -1,4 +1,4 @@
-\## TryHackMe — Tomghost
+## TryHackMe — Tomghost
 
 
 
@@ -6,13 +6,13 @@ Room: Tomghost · Difficulty: Easy · Category: Linux / Apache Tomcat
 
 
 
-\## Summary
+## Summary
 
 Tomghost is a beginner-friendly Linux machine that focuses on Apache Tomcat exploitation, PGP key passphrase cracking, and privilege escalation through misconfigured binaries. The room reinforces practical skills in enumeration, credential recovery, lateral movement, and local privilege escalation.
 
 
 
-\## Enumeration
+## Enumeration
 
 So now our target IP is 10.10.175.138 and the nmap scan returns four open ports 
 
@@ -22,7 +22,7 @@ So now our target IP is 10.10.175.138 and the nmap scan returns four open ports
 
 
 
-!\[nmapscan](./images/nmap\_base.png)
+![nmapscan](./images/nmap\_base.png)
 
 
 
@@ -34,7 +34,7 @@ Let's see the services of these specific ports
 
 
 
-!\[nmapservice](./images/nmap\_service.png)
+![nmapservice](./images/nmap\_service.png)
 
 
 
@@ -50,7 +50,7 @@ We can see that this is the Tomcat home page in the port 8080
 
 
 
-!\[webpage](./images/webpage.png)
+![webpage](./images/webpage.png)
 
 
 
@@ -58,7 +58,7 @@ I know that there is an exploit in Metasploit for this particular version of tom
 
 
 
-\## AJP
+## AJP
 
 
 
@@ -66,7 +66,7 @@ AJP (Apache Jserv Protocol), this protocl is used to send requests from web serv
 
 
 
-\## Exploit
+## Exploit
 
 
 
@@ -78,7 +78,7 @@ We're using this particular exploit named ghostcat as now on msfconsole
 
 
 
-!\[msfsearch](./images/msf\_search.png)
+![msfsearch](./images/msf\_search.png)
 
 
 
@@ -86,7 +86,7 @@ After setting up RHOSTS and ran toward our target we got a user's credential nam
 
 
 
-!\[msfcred](./images/msf\_cred.png)
+![msfcred](./images/msf\_cred.png)
 
 
 
@@ -94,7 +94,7 @@ Now we can login as the user skyfuck via ssh and we can see that there are two f
 
 
 
-!\[files](./images/sf\_ls.png)
+![files](./images/sf\_ls.png)
 
 
 
@@ -102,7 +102,7 @@ There is another user named merlin and we can able to read the files of merlin's
 
 
 
-!\[userflag](./images/usertxt.png)
+![userflag](./images/usertxt.png)
 
 
 
@@ -110,7 +110,7 @@ OK now let's take a look at those two files we saw before and before that we nee
 
 
 
-\## PGP
+## PGP
 
 pgp stands for Pretty Good Privacy and is an encryption program which we can use it for encrypting and decrypting files via credentials or public keys.
 
@@ -120,7 +120,7 @@ When we try to decrypt it with GPG tool it asks for passphrase which is really g
 
 
 
-!\[GPG res](./images/gpg\_decrypt.png)
+![GPG res](./images/gpg\_decrypt.png)
 
 
 
@@ -128,7 +128,7 @@ So now we need to transfer this tryhackme.asc file to our local machine and try 
 
 
 
-!\[gpg2john](./images/gpg2john.png)
+![gpg2john](./images/gpg2john.png)
 
 
 
@@ -136,7 +136,7 @@ Now we got the hashes and got the passphrase when we cracked it using john
 
 
 
-!\[john output](./images/john\_res.png)
+![john output](./images/john\_res.png)
 
 
 
@@ -146,15 +146,15 @@ After Decrypting we got a user credential named merlin which we already know tha
 
 
 
-!\[merlin cred](./images/cred\_gpg.png)
+![merlin cred](./images/cred\_gpg.png)
 
 
 
 
 
-\## Post Exploitation
+## Post Exploitation
 
-!\[su](./images/merlin\_init.png)
+![su](./images/merlin\_init.png)
 
 
 
@@ -162,7 +162,7 @@ Ok now it's time to search for an privilege escalation vector. we don't have any
 
 
 
-!\[crontab](./images/crontab.png)
+![crontab](./images/crontab.png)
 
 
 
@@ -170,7 +170,7 @@ And also there isn't anything good in the /tmp folder
 
 
 
-!\[ls tmp](./images/tmp.png)
+![ls tmp](./images/tmp.png)
 
 
 
@@ -178,21 +178,21 @@ While Running sudo -l we can see that we can run /usr/bin/zip as sudo without Pa
 
 
 
-!\[sudo](./images/sudo-l.png)
+![sudo](./images/sudo-l.png)
 
 
 
-\## Privilege Escalation 
+## Privilege Escalation 
 
 We got our payload ready and can use it, zip's -T/-TT test-after-archiving flag lets you run arbitrary commands as the sudo-permitted user and we're abusing it here. After using the payload we got root access and can able to read the root.txt file for flag.
 
 
 
-!\[root](./images/roottxt.png)
+![root](./images/roottxt.png)
 
 
 
-\## Root Cause \& Remediation
+## Root Cause \& Remediation
 
 
 
@@ -214,7 +214,7 @@ Enforce strong passphrases for cryptographic keys, store sensitive credentials s
 
 
 
-\## Lessons Learned / Conclusion
+## Lessons Learned / Conclusion
 
 
 
