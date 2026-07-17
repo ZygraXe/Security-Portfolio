@@ -158,7 +158,7 @@ After Decrypting we got a user credential named merlin which we already know tha
 
 
 
-Ok now it's time to search for an privilege escalation vector. we don't have any cronjobs for merlin
+Before proceeding to automated tools like LinPeas we can do some manual search for any privilege escalation vector. we don't have any cronjobs for merlin
 
 
 
