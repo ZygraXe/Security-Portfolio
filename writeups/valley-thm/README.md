@@ -32,6 +32,9 @@ Used nmap and we can see there is only three port 22, 80 and 37370 are open
 
 
 
+
+
+
 After this we ran nmap service detection scan on the target specific ports and got the service's information and also there is FTP service running on port 37370 which is quite intresting
 
 
@@ -41,6 +44,9 @@ After this we ran nmap service detection scan on the target specific ports and g
 
 
 ![nmap\_service](./images/nmap\_service.png)
+
+
+
 
 
 
