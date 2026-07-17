@@ -47,7 +47,7 @@ After this we ran nmap service detection scan on the target specific ports and g
 
 
 
-
+<br><br><br>
 
 
 On visiting the webpage at port 80 can see that it's a photography based website
@@ -56,7 +56,7 @@ On visiting the webpage at port 80 can see that it's a photography based website
 
 ![webpage](./images/webpage.png)
 
-
+<br><br><br>
 
 After spending 20 minutes of inspecting this website I found nothing useful, then i ran fuzzing on the subdirectory of the webpage and found a interesting subdirectory named "00"
 
@@ -64,7 +64,7 @@ After spending 20 minutes of inspecting this website I found nothing useful, the
 
 ![FUZZ](./images/sub\_fuzz.png)
 
-
+<br><br><br>
 
 On visiting the found subdir we got an interesting subdirectory named "/dev1243224123123"
 
@@ -72,7 +72,7 @@ On visiting the found subdir we got an interesting subdirectory named "/dev12432
 
 ![secretdir](./images/secretdir.png)
 
-
+<br><br><br>
 
 There is an login page in the found dir
 
@@ -80,7 +80,7 @@ There is an login page in the found dir
 
 ![login page](./images/login\_page.png)
 
-
+<br><br><br>
 
 I tried to brute force the login with hydra but got nearly 200+ false positive. then after carefully inspecting the sight I found a JS file named "dev.js"
 
@@ -88,7 +88,7 @@ I tried to brute force the login with hydra but got nearly 200+ false positive. 
 
 ![source](./images/source.png)
 
-
+<br><br><br>
 
 On the dev.js file we can found the a user name and password
 
@@ -96,7 +96,7 @@ On the dev.js file we can found the a user name and password
 
 ![sitecred](./images/site\_cred.png)
 
-
+<br><br><br>
 
 We can able to login to the webpage using this credential and we got an information mentioning 
 
@@ -108,7 +108,7 @@ We know that there is an ftp service running in the port 37370 so let's try to l
 
 ![ftplogon](./images/ftp\_log.png)
 
-
+<br><br><br>
 
 We can see that there are three pcapng files in there. so let's try to download and inspect it with the help of wireshark
 
@@ -116,7 +116,7 @@ We can see that there are three pcapng files in there. so let's try to download 
 
 ![ftpfiles](./images/ftp\_files.png)
 
-
+<br><br><br>
 
 On the particular file named "siemHTTP2.pcapng" we can see a user credential named "valleyDev" on the http packet
 
@@ -124,7 +124,7 @@ On the particular file named "siemHTTP2.pcapng" we can see a user credential nam
 
 ![wireshark](./images/ws.png)
 
-
+<br><br><br>
 
 So now let's try to login to the user valleyDev using SSH
 
@@ -132,7 +132,7 @@ So now let's try to login to the user valleyDev using SSH
 
 ![sshlogin](./images/ssh\_login.png)
 
-
+<br><br><br>
 
 We got the user flag in the user.txt at home directory
 
@@ -140,7 +140,7 @@ We got the user flag in the user.txt at home directory
 
 ![userflag](./images/usertxt.png)
 
-
+<br><br><br>
 
 After searching few minutes I found an executable file in the "/home" directory named
 
@@ -150,7 +150,7 @@ After searching few minutes I found an executable file in the "/home" directory 
 
 ![executable](./images/execut.png)
 
-
+<br><br><br>
 
 Let's transfer it to the local machine and try to convert the executable data using "Stings" tool
 
@@ -158,11 +158,11 @@ Let's transfer it to the local machine and try to convert the executable data us
 
 ![filetransfer](./images/filetrans.png)
 
-
+<br><br><br>
 
 ![filereceive](./images/filerec.png)
 
-
+<br>
 
 Now we can use Strings tool convert the data to readable format and store in "valley.txt"
 
@@ -170,7 +170,7 @@ Now we can use Strings tool convert the data to readable format and store in "va
 
 ![strings](./images/strings.png)
 
-
+<br><br><br>
 
 And we can able to find a encrypted md5 hash above the line "Welcome to valley Inc"
 
@@ -178,7 +178,7 @@ And we can able to find a encrypted md5 hash above the line "Welcome to valley I
 
 ![hash](./images/pass.png)
 
-
+<br><br><br>
 
 I tried to crack this md5 hash with an website called crackstation and we got an password, we can try this password for login to other users in the target machine, Guess what we successfully logged in as the user "valley" with the obtained password
 
@@ -186,7 +186,7 @@ I tried to crack this md5 hash with an website called crackstation and we got an
 
 ![valleylogin](./images/valleylog.png)
 
-
+<br><br><br>
 
 ## Privilege Escalation
 
@@ -200,7 +200,7 @@ I found that there is a cronjob that runs the file "photosEncrypt.py" as root on
 
 ![cronjob](./images/cronjob.png)
 
-
+<br><br><br>
 
 So let's inspect the file photosEncrypt.py. In there we can see it picks a image file from the directory and encrypt it with base64. 
 
@@ -216,7 +216,7 @@ So in here python uses the module base64.py and we can have access to write this
 
 ![payload](./images/payload.png)
 
-
+<br><br><br>
 
 And after a minute we got our root shell by running the cmd ```/bin/bash -p``` and now we can able to read the root.txt file
 
@@ -224,7 +224,7 @@ And after a minute we got our root shell by running the cmd ```/bin/bash -p``` a
 
 ![rootesc](./images/roottxt.png)
 
-
+<br><br><br>
 
 ## Root Cause & Remediation
 
@@ -232,7 +232,7 @@ And after a minute we got our root shell by running the cmd ```/bin/bash -p``` a
 
 Root cause:
 
-
+<br><br><br>
 
 Sensitive information, including user credentials, was exposed through publicly accessible web resources, enabling unauthorized access to the target system.
 
