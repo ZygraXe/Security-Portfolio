@@ -18,25 +18,25 @@ So now our target IP is 10.10.175.138 and the nmap scan returns four open ports
 
 
 
-'''nmap -Pn -n -T4 10.10.175.138'''
+```nmap -Pn -n -T4 10.10.175.138```
 
 
 
 ![nmapscan](./images/nmap\_base.png)
 
-
+<br><br><br>
 
 Let's see the services of these specific ports
 
 
 
-'''nmap -p 22,53,8009,8080 -sC -sV 10.10.175.138'''
+```nmap -p 22,53,8009,8080 -sC -sV 10.10.175.138```
 
 
 
 ![nmapservice](./images/nmap\_service.png)
 
-
+<br><br><br>
 
 We can see that there is an Apache Tomcat 9.0.30 running a http service via port 8080
 
@@ -52,7 +52,7 @@ We can see that this is the Tomcat home page in the port 8080
 
 ![webpage](./images/webpage.png)
 
-
+<br><br><br>
 
 I know that there is an exploit in Metasploit for this particular version of tomcat and also there are many exploits out there to use, But before that we need to know what exactly is AJP
 
@@ -74,13 +74,13 @@ We're using this particular exploit named ghostcat as now on msfconsole
 
 
 
-'''Exploit: auxiliary/admin/http/tomcat\_ghostcat'''
+```Exploit: auxiliary/admin/http/tomcat\_ghostcat```
 
 
 
 ![msfsearch](./images/msf\_search.png)
 
-
+<br><br><br>
 
 After setting up RHOSTS and ran toward our target we got a user's credential named "skyfuck"
 
@@ -88,7 +88,7 @@ After setting up RHOSTS and ran toward our target we got a user's credential nam
 
 ![msfcred](./images/msf\_cred.png)
 
-
+<br><br><br>
 
 Now we can login as the user skyfuck via ssh and we can see that there are two files named credentials.pgp and tryhackme.asc in the home directory
 
@@ -96,7 +96,7 @@ Now we can login as the user skyfuck via ssh and we can see that there are two f
 
 ![files](./images/sf\_ls.png)
 
-
+<br><br><br>
 
 There is another user named merlin and we can able to read the files of merlin's home directory due to weak permissions. we got our flag
 
@@ -104,7 +104,7 @@ There is another user named merlin and we can able to read the files of merlin's
 
 ![userflag](./images/usertxt.png)
 
-
+<br><br><br>
 
 OK now let's take a look at those two files we saw before and before that we need to know about PGP
 
@@ -122,7 +122,7 @@ When we try to decrypt it with GPG tool it asks for passphrase which is really g
 
 ![GPG res](./images/gpg\_decrypt.png)
 
-
+<br><br><br>
 
 So now we need to transfer this tryhackme.asc file to our local machine and try to crack the hashes using gpg2john.
 
@@ -130,7 +130,7 @@ So now we need to transfer this tryhackme.asc file to our local machine and try 
 
 ![gpg2john](./images/gpg2john.png)
 
-
+<br><br><br>
 
 Now we got the hashes and got the passphrase when we cracked it using john
 
@@ -138,7 +138,7 @@ Now we got the hashes and got the passphrase when we cracked it using john
 
 ![john output](./images/john\_res.png)
 
-
+<br><br><br>
 
 Now we can use this obtained passphrase to decrypt the credentials.pgp file.
 
@@ -149,14 +149,14 @@ After Decrypting we got a user credential named merlin which we already know tha
 ![merlin cred](./images/cred\_gpg.png)
 
 
-
+<br><br><br>
 
 
 ## Post Exploitation
 
 ![su](./images/merlin\_init.png)
 
-
+<br><br><br>
 
 Before proceeding to automated tools like LinPeas we can do some manual search for any privilege escalation vector. we don't have any cronjobs for merlin
 
@@ -164,7 +164,7 @@ Before proceeding to automated tools like LinPeas we can do some manual search f
 
 ![crontab](./images/crontab.png)
 
-
+<br><br><br>
 
 And also there isn't anything good in the /tmp folder 
 
@@ -172,7 +172,7 @@ And also there isn't anything good in the /tmp folder
 
 ![ls tmp](./images/tmp.png)
 
-
+<br><br><br>
 
 While Running sudo -l we can see that we can run /usr/bin/zip as sudo without Password, So now this is our privilege escalation vector.
 
@@ -180,7 +180,7 @@ While Running sudo -l we can see that we can run /usr/bin/zip as sudo without Pa
 
 ![sudo](./images/sudo-l.png)
 
-
+<br><br><br>
 
 ## Privilege Escalation 
 
@@ -190,7 +190,7 @@ We got our payload ready and can use it, zip's -T/-TT test-after-archiving flag 
 
 ![root](./images/roottxt.png)
 
-
+<br><br><br>
 
 ## Root Cause \& Remediation
 
