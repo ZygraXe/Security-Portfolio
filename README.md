@@ -10,7 +10,7 @@ All testing in this repository was performed against self-hosted, intentionally 
 | Category | Description |
 |---|---|
 | [`vapt-reports/`](./vapt-reports/) | Full engagement-style VAPT reports (recon → exploitation → remediation) |
-| `writeups/` | TryHackMe / CTF walkthroughs *(coming soon)* |
+| [`writeups/`](./writeups) | TryHackMe / CTF walkthroughs *(coming soon)* |
 | `tools/` | Custom scripts and tooling built for pentesting workflows *(coming soon)* |
 
 ## Tools & Skills
