@@ -61,7 +61,7 @@ I know that there is an exploit in Metasploit for this particular version of tom
 
 
 
-AJP (Apache Jserv Protocol), this protocl is used to send requests from web server to backend application server like tomcat and usually runs at port 8009. But the problem in here is that this tomcat version highly trust any AJP request independent of the source, so a attacker can read the sensitive files and also can include payloads by crafting a AJP request. so that's the reason why this service port should be inaccessible for unknown users.
+AJP (Apache Jserv Protocol), this protocol is used to send requests from web server to backend application server like tomcat and usually runs at port 8009. But the problem in here is that this tomcat version highly trust any AJP request independent of the source, so a attacker can read the sensitive files and also can include payloads by crafting a AJP request. so that's the reason why this service port should be inaccessible for unknown users.
 
 
 
