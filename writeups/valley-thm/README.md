@@ -102,6 +102,10 @@ We can able to login to the webpage using this credential and we got an informat
 
 "Stop reusing Credentials"
 
+<br><br><br>
+
+![hint](./images/sitehint.png)
+
 We know that there is an ftp service running in the port 37370 so let's try to login in with the credentials we got and yes we are in!
 
 
