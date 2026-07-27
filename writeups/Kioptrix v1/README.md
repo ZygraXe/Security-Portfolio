@@ -1,16 +1,15 @@
-\## Vulnhub — Kioptrix1 Walkthrough
+## Vulnhub — Kioptrix1 Walkthrough
 
 
 
 
-
-\## Summary
+## Summary
 
 Kioptrix Level 1 is a beginner-friendly boot-to-root virtual machine designed to teach the fundamentals of penetration testing. The objective is to obtain root access by identifying and exploiting intentionally vulnerable services running on the target system. The lab emphasizes methodology over simply running exploits
 
 
 
-\## Enumeration
+## Enumeration
 
 
 
@@ -22,7 +21,7 @@ First Let's discover our target machine on our network using nmap
 
 
 
-!\[nmapdiscover](./images/nmap\_hostdis.png)
+![nmapdiscover](./images/nmap_hostdis.png)
 
 
 
@@ -38,7 +37,7 @@ We can now see that our target machine is in ip 192.168.23.140 and let's start t
 
 
 
-!\[nmap base](./images/nmap\_base.png)
+![nmap base](./images/nmap_base.png)
 
 
 
@@ -56,7 +55,7 @@ We can see that there are 6 ports were open, so let's run the service discovery
 
 
 
-!\[nmap serv](./images/nmap\_serv.png)
+![nmap serv](./images/nmap_serv.png)
 
 
 
@@ -72,7 +71,7 @@ We got the service information and samba smb and mod\_ssl were really interestin
 
 
 
-!\[gobuster](./images/gobuster.png)
+![gobuster](./images/gobuster.png)
 
 
 
@@ -88,7 +87,7 @@ So we got nothing interesting from the directory brute forcing. I ran enum4linux
 
 
 
-!\[enum4linux](./images/enum4linux.png)
+![enum4linux](./images/enum4linux.png)
 
 
 
@@ -104,7 +103,7 @@ Let's try to connect to the target machine with rpcclient
 
 
 
-!\[rpccient](./images/rpcclient.png)
+![rpccient](./images/rpcclient.png)
 
 
 
@@ -120,7 +119,7 @@ We got no information from the rpcclient. Let's try to enumerate the samba smb v
 
 
 
-!\[msfver](./images/msf\_ver.png)
+![msfver](./images/msf_ver.png)
 
 
 
@@ -134,7 +133,7 @@ Now we know that the version of samba was 2.2.1a which is vulnerable for trans2o
 
 
 
-\## Exploit
+## Exploit
 
 
 
@@ -154,7 +153,7 @@ There is an built-in msf exploit for this vulnerability
 
 
 
-!\[msfexp](./images/msf\_exp.png)
+![msfexp](./images/msf_exp.png)
 
 
 
@@ -166,7 +165,7 @@ Now after running the exploit we got a root shell back from msf.
 
 
 
-!\[root](./images/root.png)
+![root](./images/root.png)
 
 
 
@@ -176,17 +175,17 @@ Now after running the exploit we got a root shell back from msf.
 
 
 
-\## The Reason why I choose trans2open over mod\_ssl
+## The Reason why I choose trans2open over mod_ssl
 
 
 
-The Samba trans2open exploit was chosen over the mod\_ssl exploit because the mod\_ssl exploit provides a shell with apache user privileges, requiring an additional local privilege escalation step to obtain root access. In contrast, the Samba trans2open vulnerability directly grants a root shell upon successful exploitation, making it a more efficient attack path.
+The Samba trans2open exploit was chosen over the mod_ssl exploit because the mod\_ssl exploit provides a shell with apache user privileges, requiring an additional local privilege escalation step to obtain root access. In contrast, the Samba trans2open vulnerability directly grants a root shell upon successful exploitation, making it a more efficient attack path.
 
 
 
 
 
-\## Remediation:
+## Remediation:
 
 
 
@@ -202,7 +201,7 @@ The Samba trans2open exploit was chosen over the mod\_ssl exploit because the mo
 
 
 
-\## Lessons Learned
+## Lessons Learned
 
 * Thorough enumeration is essential for identifying vulnerable services.
 * Running outdated software significantly increases the risk of system compromise.
@@ -213,7 +212,7 @@ The Samba trans2open exploit was chosen over the mod\_ssl exploit because the mo
 
 
 
-\## Conclusion
+## Conclusion
 
 The assessment successfully demonstrated that the target system was vulnerable to the Samba trans2open Stack Buffer Overflow (CVE-2003-0201). Exploiting this vulnerability resulted in direct root-level access, highlighting the critical impact of unpatched services. Implementing regular updates, restricting service exposure, and following security best practices will significantly reduce the risk of similar attacks in production environments.
 
