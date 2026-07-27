@@ -121,13 +121,12 @@ We got no information from the rpcclient. Let's try to enumerate the samba smb v
 
 ![msfver](./images/msf_ver.png)
 
-
+Now we know that the version of samba was 2.2.1a which is vulnerable for trans2open
 
 <br><br><br>
 
 
 
-Now we know that the version of samba was 2.2.1a which is vulnerable for trans2open
 
 
 
