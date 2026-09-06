@@ -34,6 +34,9 @@ To confirm the pipeline was actually working end to end, I generated each event 
 - **Successful logon** — logged on as a domain user → 4624 appeared within seconds.
  ![Successful logon event 4624 in Wazuh dashboard](./images/4624.png)
 <br><br>
+- **Failed logon** — deliberately entered a wrong password → 4625 appeared, with the Sub Status code confirming a bad-password attempt.
+ ![Failed logon event 4625 in Wazuh dashboard](./images/4625.png)
+<br><br>
 - **Kerberos ticket request** — accessed a file share on the DC from the Windows 10 client → 4769 appeared, logged on the domain controller.
  ![Kerberos service ticket event 4769 in Wazuh dashboard](./images/4769.png)
 <br><br>
